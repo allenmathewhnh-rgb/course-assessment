@@ -33,7 +33,6 @@ function App() {
       );
 
       fetchModules();
-
       setName("");
       setRating(5);
       setComment("");
@@ -43,80 +42,64 @@ function App() {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div className="container">
       <h1>Course Assessment</h1>
 
       {modules.map((module) => (
-        <div
-          key={module.id}
-          style={{
-            border: "1px solid #ccc",
-            padding: "15px",
-            marginBottom: "20px",
-          }}
-        >
+        <div className="module-card" key={module.id}>
           <h2>{module.title}</h2>
           <p>{module.description}</p>
 
-          <h3>Feedback</h3>
+          <section className="feedback-section">
+            <h3>Feedback</h3>
 
-          {module.feedbacks.length > 0 ? (
-            module.feedbacks.map((feedback) => (
-              <div key={feedback.id}>
-                <p>
-                  <strong>Name:</strong> {feedback.name}
-                </p>
-                <p>
-                  <strong>Rating:</strong> {feedback.rating}
-                </p>
-                <p>
-                  <strong>Comment:</strong> {feedback.comment}
-                </p>
-                <hr />
-              </div>
-            ))
-          ) : (
-            <p>No feedback yet.</p>
-          )}
+            {module.feedbacks.length ? (
+              module.feedbacks.map((feedback) => (
+               <div className="feedback-card" key={feedback.id}>
+               <div className="feedback-top">
+                 <strong>{feedback.name}</strong>
+                 <span>⭐ {feedback.rating}/5</span>
+               </div>
 
-          <h3>Add Feedback</h3>
+                 <p>{feedback.comment}</p>
+               </div> 
+              ))
+            ) : (
+              <p>No feedback yet.</p>
+            )}
+          </section>
 
-          <input
-            type="text"
-            placeholder="Your Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
+          <section className="form-section">
+            <h3>Add Feedback</h3>
 
-          <br />
-          <br />
+            <input
+              type="text"
+              placeholder="Your Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
 
-          <select
-            value={rating}
-            onChange={(e) => setRating(Number(e.target.value))}
-          >
-            <option value={1}>1</option>
-            <option value={2}>2</option>
-            <option value={3}>3</option>
-            <option value={4}>4</option>
-            <option value={5}>5</option>
-          </select>
+            <select
+              value={rating}
+              onChange={(e) => setRating(Number(e.target.value))}
+            >
+              <option value={1}>1 Star</option>
+              <option value={2}>2 Stars</option>
+              <option value={3}>3 Stars</option>
+              <option value={4}>4 Stars</option>
+              <option value={5}>5 Stars</option>
+            </select>
 
-          <br />
-          <br />
+            <textarea
+              placeholder="Write your feedback..."
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+            />
 
-          <textarea
-            placeholder="Comment"
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-          />
-
-          <br />
-          <br />
-
-          <button onClick={() => handleSubmit(module.id)}>
-            Submit Feedback
-          </button>
+            <button onClick={() => handleSubmit(module.id)}>
+              Submit Feedback
+            </button>
+          </section>
         </div>
       ))}
     </div>
