@@ -1,6 +1,6 @@
-# Course Assessment
+# Full-Stack Course Syllabus Tracker 
 
-A full-stack Course Assessment application built with Django REST Framework, React, Axios, and SQLite.
+A full-stack Course Syllabus Tracker application built with Django REST Framework, React, Axios, and SQLite.
 
 ## Prerequisites
 
